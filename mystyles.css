@@ -38,3 +38,25 @@ li,li:hover{
     padding: 10px;
     margin: 15px;
 }
+.big-text {
+    color:white;
+    margin: 0px;
+    font-size: clamp(40px, 8vw, 80px);
+  }
+ .vr-email{
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    letter-spacing: 0.1em;
+ }
+ .vl{
+    height:50%;
+    border-left: 2px white solid;
+    position: absolute;
+    margin-left: 8.5px;
+    margin-top: 15px;
+ }
+ .right{
+    background-attachment: fixed;
+    position: absolute;
+    margin-left: 95%;
+ } 
