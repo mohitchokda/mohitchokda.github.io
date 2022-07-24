@@ -23,6 +23,9 @@ li,li:hover{
     padding: 10px;
     margin: 10px;
 }
+.container{
+    margin-top: 10px;
+}
 .resumeBtn{
     color: #64ffda;
     background-color: transparent;
@@ -37,6 +40,12 @@ li,li:hover{
     font-size: 20px;
     padding: 10px;
     margin: 15px;
+}
+.sub-head{
+    text-align: center;
+    margin-top: 30px;
+    color: #ccd6f6;
+    font-family: 'Calibre','Inter','San Francisco','SF Pro Text',-apple-system,system-ui,sans-serif;
 }
 .big-text {
     color:white;
@@ -59,4 +68,20 @@ li,li:hover{
     background-attachment: fixed;
     position: absolute;
     margin-left: 95%;
+ }
+ .prj-lists{
+    padding: 0%;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    position: relative;
+ }
+ .prj-item{
+    align-items: center;
+    background-color: #112240;
+ }
+ .prj-inner{
+    padding: 10px;
+    text-align: center;
  } 
