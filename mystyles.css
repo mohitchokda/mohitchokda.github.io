@@ -23,7 +23,7 @@ a:hover, a:focus,.nav-link:hover{
 .container{
     margin-top: 20px;
     margin-bottom: 15px;
-    padding: 5px;
+    padding: 8px;
 }
 .resumeBtn{
     color: #64ffda;
@@ -101,4 +101,9 @@ a:hover, a:focus,.nav-link:hover{
  }
 h3{
    color: #ccd6f6;
+}
+.tab-content{
+   padding: 5px;
+   margin-left: 20px;
+   margin-right: 20px;
 }
