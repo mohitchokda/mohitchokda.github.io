@@ -1,5 +1,5 @@
 Welcome to my online portfolio site
 
-Im a software engineer 
+Im a software engineer working as an RPA developer. I keep my interest in developing through technology and Upskilling.
 
-List of My Projects and Code : https://mohitchokda.github.io/Mohit_Projects/
+My Portfolio Website : "https://mohitchokda.github.io/"
