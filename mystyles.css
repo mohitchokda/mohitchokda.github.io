@@ -132,3 +132,12 @@ h3{
 #Contact{
    align-items: center;
 }
+
+@media (max-width: 768px) {
+   .col-3 {
+     width: 100%;
+   }
+   .vr-email{
+      display: none;
+   }
+ }
