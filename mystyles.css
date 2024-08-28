@@ -56,13 +56,6 @@ a:hover, a:focus,.nav-link:hover{
     text-orientation: mixed;
     letter-spacing: 0.1em;
  }
- .vl{
-    height:50%;
-    border-left: 2px white solid;
-    position: absolute;
-    margin-left:15px;
-    margin-top: 15px;
- }
  .right{
     background-attachment: fixed;
     position: absolute;
@@ -77,27 +70,56 @@ a:hover, a:focus,.nav-link:hover{
     gap: 20px;
     position: relative;
  }
- .prj-item{
-    align-items: center;
-    background-color: #112240;
+
+ .card-body{
+   padding: 1rem;
+   text-align: center;
+   background-color: #112240;
+   color: #8892b0;
+   border-radius: 30px;
+   flex-grow: 1;
  }
+ .card-title{
+   margin-top: 10px; 
+   color: #64ffda;
+   text-decoration:underline;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+ .card{
+    text-align: center;
+    background-color: #112240;
+    border-radius: 30px;
+    margin-top: 30px;
+    padding: 10px;
+ }
+ .card-img-top{
+   width: 100px;
+   height: 100px;
+   align-self: center;
+   margin-bottom: 10px;
+ }
+
  .prj-inner{
     padding: 10px;
     text-align: center;
  }
- .nav-item1{
+ .nav-item{
    padding-right: 25px;
  }
  .nav-link{
    color: antiquewhite;
  }
  .nav-link:hover{
-   border-radius: 5px;
-   border-color: #64ffda;
-   border:1px solid#64ffda;
+   color: #64ffda;
  }
- .nav-link.active{
-   background-color: none;
+ .navbar-nav .nav-link.active{
+   color: #64ffda;
+ }
+ .navbar-toggler{
+   background-color: #64ffda;
+ }
+ .navbar-toggler:focus{
+   box-shadow: none;
  }
 h3{
    color: #ccd6f6;

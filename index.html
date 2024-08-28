@@ -1,17 +1,19 @@
 <html>
   <head>
-    <title>Mohit Online Portfolio Site</title>
+    <title>Mohit Portfolio Site</title>
      <!-- Latest compiled and minified CSS -->
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="mystyles.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
+      <link rel="stylesheet" type="text/css" href="mystyles.css">
   </head>
   <body>
-  
+    <!--BootStrap Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
     <!--Navigation Bar-->
     <header>
-      <nav class="navbar sticky-top navbar-expand-lg">
+      <nav style="background-color: #0a1925;" class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <div style="transform: scale(0.35);">
@@ -24,31 +26,48 @@
               </svg>
             </div>
           </a>
-          <div class="navbar-right" id="navbarTogglerDemo01">
-            <ul class="navbar me-auto mb-2 mb-lg-0">
-              <li class="nav-item1">
-                <a class="active" aria-current="page" href="#">About</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">About</a>
               </li>
-              <li class="nav-item1">
-                <a href="#Experience">Experience</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#Experience">Experience</a>
               </li>
-              <li class="nav-item1">
-                <a class="" href="#Projects">My Projects</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#Projects">Projects</a>
               </li>
-              <li class="nav-item1">
-                <a class="" href="#Contact">Contact</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#Contact">Contact</a>
               </li>
-              <a target="_blank" type="button" class="resumeBtn" href="MyDocs/Resume/Mohit_Resume.pdf" rel="noopener norefferer">Resume</a>
-            </div>
-          </ul>
+      <!-- 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+          <a target="_blank" type="button" class="resumeBtn" href="MyDocs/Resume/Mohit_Resume.pdf" rel="noopener norefferer">Resume</a>
         </div>
       </nav>
     </header>
     
     <!--Email right pane-->
     <div class="position-fixed right">
-      <div class="vr-email"><a href="mailto:mohitchokda02@gmail.com">mohitchokda02@gmail.com</a></div>
-      <div class="vl"></div>
+      <div class="vr-email flex-column">
+        <div class="vr" style="width: 2px;"></div>
+        <a href="mailto:mohitchokda02@gmail.com">mohitchokda10@gmail.com</a>
+        <div class="vr"></div>
+      </div>
     </div>
 
     <!--Intro Section-->
@@ -56,18 +75,21 @@
       <p style="color:64ffda">Hello, my name is</p>
       <h1 class="big-text">Mohit Chokda</h1>
       <h2>A Software Enginner and an Innovator</h2>
-      <p>I'm a software enginner currently working on Robotic Process Automation Development. Always passionate about developing through Technology.</p>
+      <p>I'm a software enginner currently working on Java Full Stack and Robotic Process Automation Development. Always passionate about developing through Technology.</p>
     </div>
     
     <!--Experience Section-->
     <div id="Experience" class="container">
       <h1 class="sub-head">Industry Experience :</h1>
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <div class="row align-items-start">
+        <div class="col-3">
+        <div class="nav flex-column nav-pills me-3 text-wrap" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button class="nav-link active" id="virtusa-tab" data-bs-toggle="pill" data-bs-target="#virtusa" type="button" role="tab" aria-controls="virtusa" aria-selected="true">Virtusa Technologies</button>
-          <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Inkwall Technologies</button>
+          <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#Inkwall" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Inkwall Technologies</button>
+        </div>
         </div>
         <!--Experience Data-->
+        <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="virtusa" role="tabpanel" aria-labelledby="virtusa-tab">
             <h3>RPA Developer <span style="color: #64ffda;">@Virtusa Technologies</span></h3>
@@ -82,7 +104,7 @@
               </ul>
             </div>
           </div>
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <div class="tab-pane fade" id="Inkwall" role="tabpanel" aria-labelledby="v-pills-profile-tab">
             <h3>Game Developer Intern <span style="color: #64ffda;">@Inkwall Technologies</span></h3>
             <p>July 2018 - Oct 2018</p>
             <div>
@@ -92,6 +114,7 @@
               </ul>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -106,34 +129,60 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="webapps-tab" data-bs-toggle="tab" data-bs-target="#webapps" type="button" role="tab" aria-controls="webapps" aria-selected="false">Web Apps</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <button class="nav-link" id="android-tab" data-bs-toggle="tab" data-bs-target="#androidApps" type="button" role="tab" aria-controls="androidApps" aria-selected="false">Android Apps</button>
-        </li>
+        </li> -->
       </ul>
 
       <!--Project Section Data Tabs-->
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane active" id="GamePrjs" role="tabpanel" aria-labelledby="GameProjects-tab">
-          <ul class="prj-lists">
-            <l1 class="prj-item">
-              <div class="prj-inner">
-                <h3 style="margin-top: 10px; color: #64ffda;text-decoration:underline;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ">JS Pong Game</h4>
-                <div class="prj-info">
-                  <p style="font-size: 15px;">Pong Game developed using JavaScript <a href="pong.html" target="_blank"> Click here </a> and play the game</p> 
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                  <div class="card h-100">
+                  <a href="pong.html" target="_blank"><img src="/MyAssets/images/retro-game.png" class="card-img-top" alt="RetroBox"></a>
+                  <div class="card-body">
+                      <h5 class="card-title">Retro Box Gaming Site</h5>
+                      <p class="card-text">Retro Box - A online gaming platform to play simple games easily<a href="pong.html" target="_blank"> Click here </a>and explore to play</p>
+                  </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <a href="pong.html" target="_blank"><img src="/MyAssets/images/CardDeck.png" class="card-img-top" alt="CardBattle"></a>
+                <div class="card-body">
+                  <h5 class="card-title">Indian Card Battle </h5>
+                  <p class="card-text">This is a card battle game with Desi Tadka</p>
                 </div>
               </div>
-            </l1>
-            <l1 class="prj-item">
-              <h4>My First Project</h4>
-            </l1>
-            <l1 class="prj-item">
-              <h4>My First Project</h4>
-            </l1>
-          </ul>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <a href="pong.html" target="_blank"><img src="/MyAssets/images/snake_Icon.png" class="card-img-top" alt="Snake Evolution"></a>
+                <div class="card-body">
+                  <h5 class="card-title">Snake Evolution</h5>
+                  <p class="card-text">Snake Game build with Unity 3D</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col">
+              <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+
+
+        
         </div>
       <div class="tab-pane fade" id="webapps" role="tabpanel" aria-labelledby="webapps-tab">Web Apps</div>
-      <div class="tab-pane fade" id="androidApps" role="tabpanel" aria-labelledby="android-tab">Android Apps </div>
-      </div>
+      <!-- <div class="tab-pane fade" id="androidApps" role="tabpanel" aria-labelledby="android-tab">Android Apps </div>
+      </div> -->
     </div>
 
     <!--Footer About-->
@@ -159,7 +208,7 @@
       </div>
       </a>
       
-      <a href="mailto:mohitchokda02@gmail.com">
+      <a href="mailto:mohitchokda10@gmail.com">
       <div class="fs-4 mb-3">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
