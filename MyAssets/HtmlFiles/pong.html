@@ -1,189 +1,355 @@
-<html>
-    <head>
-        <title>Mohit's JS Pong Game</title>
-     <!-- Latest compiled and minified CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
 
-      <!-- Latest compiled JavaScript -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-          
-        <link rel="stylesheet" type="text/css" href="/MyAssets/Css/mystyles.css">
-    </head>
-    <body>
-        <h1 style="text-align: center;"><u>Tennis Game</u></h1>
-        <div class="container position-fixed" style="width:800px;height:440px;">
-            <canvas id="game" style="width:100%;height:90%;"></canvas>
-        </div>
-    
-    <script>
-    var canvas;
-    var canvasContext;
-    var ballX=5;
-    var ballY=5;
-    var paddle1Y=document.getElementById('game').height/2;
-    var paddle2Y=document.getElementById('game').height/2;
-    var player1Score=0;
-    var player2Score=0;
-    var player_winScreen=false;
-    const PADDLE_HEIGHT=50;
-    const PADDLE_WIDTH=5;
-    const WIN_SCORE=5;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    //ball speed
-    var ballSpeedX=5;
-    var ballSpeedY=4;
-    //if spped is negitive it moves in opp direction
+    <title>PONG GAME by Mohit</title>
 
-    function getMousePos(evt){
-    //get canvas rectangle
-    var rect=canvas.getBoundingClientRect();
-    //get document
-    var root=document.documentElement;
-    //substracting values when the mouse is outside the canvas
-    var mouseX=evt.clientX -rect.left -root.scrollLeft;
-    var mouseY=evt.clientY -rect.top -root.scrollTop;
-    return {
-    x:mouseX,
-    y:mouseY
-    };
-    }
-
-    function resetScreen(){
-    if(player_winScreen){
-        player1Score=0;
-        player2Score=0;
-        player_winScreen=false;
-    }
-    }
-        //onload
-        window.onload=function(){
-        canvas=document.getElementById('game');
-        canvasContext=canvas.getContext('2d');
-
-    var framesPerSecond=30;
-    setInterval(function(){
-        drawThings();
-        moveThings();
-    },1000/framesPerSecond);
-    //add event listener
-    //evt gives mouse position
-    canvas.addEventListener('mousemove', 
-            function(evt){
-        var mousepos=getMousePos(evt);
-        paddle1Y=mousepos.y-(PADDLE_HEIGHT/2);//places the mouse at center	   
-                        });
-    //now we have to use it for player paddle
-
-    canvas.addEventListener('mousedown',resetScreen);
-    }
-    //computer player
-    function computerPlayer(){
-    var paddle2Center=paddle2Y+(PADDLE_HEIGHT/2)
-    if(paddle2Center < ballY-35)
-        paddle2Y=paddle2Y+6;
-        else if(paddle2Center > ballY+35)
-        paddle2Y=paddle2Y-6;	  
-    }
-    //to move things
-    function moveThings(){
-    //change it to change the speed
-    if(player_winScreen)
-    return;
-    computerPlayer();
-    ballX=ballX+ballSpeedX;
-    ballY=ballY+ballSpeedY;
-    //move in x-axis
-    if(ballX > canvas.width-50){
-    //right side
-        if(ballY > paddle2Y && ballY < (paddle2Y+PADDLE_HEIGHT)){
-        ballSpeedX = -ballSpeedX;
-            var deltaY=ballY-(paddle2Y+PADDLE_HEIGHT/2);
-            ballSpeedY=deltaY*(1/3);
-        }else{
-        player1Score++;
-            resetBall();
-            
-        }		
-        }	 
-    if(ballX < 32){
-    //left side
-        if(ballY > paddle1Y && ballY < (paddle1Y+PADDLE_HEIGHT)){
-            ballSpeedX = -ballSpeedX;
-            var deltaY=ballY-(paddle1Y+PADDLE_HEIGHT/2);
-            ballSpeedY=deltaY*(1/3);
-            }
-        else{
-        player2Score++; 
-            resetBall();
+    <style>
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
         
-        }		 
-        }	 
-    //move in y-axis	 
-    if(ballY < 0){
-        ballSpeedY = -ballSpeedY;
-        } 
-    if(ballY > canvas.height){
-        ballSpeedY = -ballSpeedY;
-        } 
-    }
+        body {
+          height: 100vh;
+          width: 100vw;
+          background-color: #0a1925;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .board {
+          height: 85vh;
+          width: 80vw;
+          background-color: #8892b0;
+          border-radius: 14px;
+        }
+        
+        .ball {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          position: fixed;
+          top: calc(50% - 15px);
+          left: calc(50% - 15px);
+        }
+        
+        .ball_effect {
+          height: 100%;
+          width: 100%;
+          border-radius: 100px;
+          animation: spinBall 1s linear infinite;
+          box-shadow: inset 0 0px 0px #c5490d, 
+                    inset 1px -2px 18px #bb1212, 
+                    inset -7px -12px 18px #bf611f, 
+                    inset 1px -1px 30px #cfb70b, 
+                    inset -6px 0 30px #f10a0a, 
+                    0 0 18px #e30808, 
+                    1px 0px 11px #db8a10, 
+                    6px 2px 18px #cd5b0e;
+        }
+        
+        @keyframes spinBall {
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        
+        .paddle {
+          height: 100px;
+          width: 18px;
+          border-radius: 10%;
+          position: fixed;
+        }
+        
+        .paddle_1 {
+          top: calc(7.5vh + 55px);
+          left: calc(10vw + 30px);
+          box-shadow: inset 0 0 18px #893604, 
+          inset -6px 0 18px #813509, 
+          inset 6px 0 18px #f37706, 
+          inset -6px 0 30px #f3bad6, 
+          inset 6px 0 30px #e18657,
+           -12px 5px 18px #6ee517, 
+           4px 0 18px #f3bad6,
+            -11px 0px 18px #52f704;
+        }
+        
+        .paddle_2 {
+          top: calc(85vh + 7.5vh - 100px - 55px);
+          right: calc(10vw + 30px);
+          box-shadow: inset 0 0 18px #fff, 
+            inset 6px 0 18px #f3bad6,
+            inset -6px 0 18px #0ff, inset 6px 0 30px #f3bad6,
+            inset -6px 0 30px #0ff,
+            0 0 18px #fff, -4px 0 18px #f3bad6, 4px 0 18px #0ff;
+        }
+        
+        .player_1_score {
+          height: 50px;
+          width: 50px;
+          color: #ccd6f6;
+          position: fixed;
+          left: 30vw;
+          margin-top: 30px;
+        }
+        
+        .player_2_score {
+          height: 50px;
+          width: 50px;
+          color: #ccd6f6;
+          position: fixed;
+          left: 70vw;
+          margin-top: 30px;
+        }
+        
+        .message {
+          position: fixed;
+          /* color: #48426d; */
+          height: 10vh;
+          width: 30vw;
+          color: #64ffda;
+          left: 38vw;
+          margin: 30px auto auto auto;
+          text-shadow: #52f704;
+          filter: blur(2);
+        }
 
-    function drawNet(){
+        @media (max-width: 768px) {
+            .board{
+                height: 40vh;
+                align-self: flex-start;
+                margin-top: 50px;
+            }
+            .paddle_1 {
+                top: calc(7.5vh + 35px);
+                left: calc(10vw + 20px);
+            }
+            .paddle_2 {
+                top: 30vh;
+            }
+            .paddle {
+                height: 50px;
+                width: 8px;
+            }
+            .ball{
+                height: 15px;
+                width: 15px;
+                top: 20vh;
+            }
+            .message{
+                scale: 0.8;
+            }
+        }
+    </style>
 
-    for(var i=0;i<canvas.height;i=i+20)
-        drawRect(canvas.width/2-1,i,2,8,'white');
-    }
+    
+</head>
 
-    //to draw
-    function drawThings(){
-    //black screen
-    drawRect(0,0,canvas.width,canvas.height,'black');
-    if(player_winScreen){
-        canvasContext.fillStyle='white';
-    if(player1Score>=WIN_SCORE)
-            canvasContext.fillText("LEFT    PLAYER    WINS",400,100);
-        else if(player2Score>=WIN_SCORE)
-                canvasContext.fillText("RIGHT    PLAYER    WINS",420,100);
-    canvasContext.fillText("CLICK    TO     PLAY     AGAIN",450,500);
-    return;
-    }
-    //left paddle
-    drawRect(10,paddle1Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
-    //right paddle
-    drawRect(canvas.width-10,paddle2Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
-    //net
-    drawNet();
-    //ball
-    drawCircle(ballX,ballY,3,'red');
-    canvasContext.fillStyle='blue';
-    canvasContext.fillText('player1:',100,100);
-    canvasContext.fillText(player1Score,110,120);
-    canvasContext.fillText('player2:',canvas.width-150,100);
-    canvasContext.fillText(player2Score,canvas.width-140,120);
-    }
-    //function to draw circle
-    function drawCircle(cx,cy,radius,color){
-    canvasContext.fillStyle=color;
-    canvasContext.beginPath();
-    canvasContext.arc(cx,cy,radius,0,Math.PI*2,true);
-    canvasContext.fill();
-    }
-    //function to draw rectangle
-    function drawRect(x,y,width,height,color){
-    canvasContext.fillStyle=color;
-    canvasContext.fillRect(x,y,width,height);
-    }
-    //ball reset function
-    function resetBall(){
+<body>
+    <div class="board" onmousemove="movePaddle(event)" ontouchmove="movePaddleByTouch(event)" ontouchstart="StartGameByTouch(event)">
+        <div class='ball'>
+            <div class="ball_effect"></div>
+        </div>
+        <div class="paddle_1 paddle"></div>
+        <div class="paddle_2 paddle"></div>
+        <h1 class="player_1_score">0</h1>
+        <h1 class="player_2_score">0</h1>
+        <h1 class="message">
+            Press Enter to Play Pong
+        </h1>
+    </div>
 
-    if(player1Score >= WIN_SCORE || player2Score >= WIN_SCORE){
-    player_winScreen=true;
-    }
-    ballSpeedX=-ballSpeedX;//changes direction of ball
-    ballX=canvas.width/2;
-    ballY=canva.height/2;
-    }
+
+    <script>
+        let gameState = 'start';
+        let paddle_1 = document.querySelector('.paddle_1');
+        let paddle_2 = document.querySelector('.paddle_2');
+        let board = document.querySelector('.board');
+        let initial_ball = document.querySelector('.ball');
+        let ball = document.querySelector('.ball');
+        let score_1 = document.querySelector('.player_1_score');
+        let score_2 = document.querySelector('.player_2_score');
+        let message = document.querySelector('.message');
+        let paddle_1_coord = paddle_1.getBoundingClientRect();
+        let paddle_2_coord = paddle_2.getBoundingClientRect();
+        let initial_ball_coord = ball.getBoundingClientRect();
+        let ball_coord = initial_ball_coord;
+        let board_coord = board.getBoundingClientRect();
+        let paddle_common = 
+            document.querySelector('.paddle').getBoundingClientRect();
+        let dx = Math.floor(Math.random() * 4) + 3;
+        let dy = Math.floor(Math.random() * 4) + 3;
+        let dxd = Math.floor(Math.random() * 2);
+        let dyd = Math.floor(Math.random() * 2);
+        let WIN_SCORE=10;
+
+
+
+        function movePaddle(event){
+            //console.log(event.pageY);
+            if (gameState == 'play') {
+                //console.log(e.pageY +" "+e.clientY + ""+e.screenY);
+                let p = event.clientY;
+                
+                if(p<=board_coord.top){
+                    p = board_coord.top;
+                }
+                if(p+paddle_common.height>=board_coord.bottom){
+                    p = board_coord.bottom-paddle_common.height;
+                }
+
+                paddle_1.style.top = p+"px";
+                paddle_1_coord = paddle_1.getBoundingClientRect();
+            }
+        };
+
+        function movePaddleByTouch(event){
+            //console.log(event.touches[0].clientY);
+            if (gameState == 'play') {
+                //console.log(e.pageY +" "+e.clientY + ""+e.screenY);
+                let p = event.touches[0].clientY;
+
+                if(p<=board_coord.top){
+                    p = board_coord.top;
+                }
+                if(p+paddle_common.height>=board_coord.bottom){
+                    p = board_coord.bottom-paddle_common.height;
+                }
+                paddle_1.style.top = p+"px";
+                paddle_1_coord = paddle_1.getBoundingClientRect();
+            }
+        }
+
+        function StartGameByTouch(e){
+            console.log(event.touches[0].clientY);
+            if(gameState == 'play') return;
+
+            gameState = gameState == 'start' ? 'play' : 'start';
+            if (gameState == 'play') {
+              message.innerHTML = 'Game Started';
+              message.style.left = 42 + 'vw';
+              requestAnimationFrame(() => {
+                dx = Math.floor(Math.random() * 4) + 3;
+                dy = Math.floor(Math.random() * 4) + 3;
+                dxd = Math.floor(Math.random() * 2);
+                dyd = Math.floor(Math.random() * 2);
+                moveBall(dx, dy, dxd, dyd);
+              });
+            }
+        };
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key == 'Enter') {
+            gameState = gameState == 'start' ? 'play' : 'start';
+            if (gameState == 'play') {
+              message.innerHTML = 'Game Started';
+              message.style.left = 42 + 'vw';
+              requestAnimationFrame(() => {
+                dx = Math.floor(Math.random() * 4) + 3;
+                dy = Math.floor(Math.random() * 4) + 3;
+                dxd = Math.floor(Math.random() * 2);
+                dyd = Math.floor(Math.random() * 2);
+                moveBall(dx, dy, dxd, dyd);
+              });
+            }
+          }
+          if (gameState == 'play') {
+            // if (e.key == 'w') {
+            //   paddle_1.style.top =
+            //     Math.max(
+            //       board_coord.top,
+            //       paddle_1_coord.top - window.innerHeight * 0.06
+            //     ) + 'px';
+            //   paddle_1_coord = paddle_1.getBoundingClientRect();
+            // }
+            // if (e.key == 's') {
+            //   paddle_1.style.top =
+            //     Math.min(
+            //       board_coord.bottom - paddle_common.height,
+            //       paddle_1_coord.top + window.innerHeight * 0.06
+            //     ) + 'px';
+            //   paddle_1_coord = paddle_1.getBoundingClientRect();
+            // }
+        
+            if (e.key == 'ArrowUp') {
+              paddle_2.style.top =
+                Math.max(
+                  board_coord.top,
+                  paddle_2_coord.top - window.innerHeight * 0.1
+                ) + 'px';
+              paddle_2_coord = paddle_2.getBoundingClientRect();
+            }
+            if (e.key == 'ArrowDown') {
+              paddle_2.style.top =
+                Math.min(
+                  board_coord.bottom - paddle_common.height,
+                  paddle_2_coord.top + window.innerHeight * 0.1
+                ) + 'px';
+              paddle_2_coord = paddle_2.getBoundingClientRect();
+            }
+          }
+        });
+        
+        function moveBall(dx, dy, dxd, dyd) {
+          if (ball_coord.top <= board_coord.top) {
+            dyd = 1;
+          }
+          if (ball_coord.bottom >= board_coord.bottom) {
+            dyd = 0;
+          }
+          if (
+            ball_coord.left <= paddle_1_coord.right &&
+            ball_coord.top >= paddle_1_coord.top &&
+            ball_coord.bottom <= paddle_1_coord.bottom
+          ) {
+            dxd = 1;
+            dx = Math.floor(Math.random() * 4) + 3;
+            dy = Math.floor(Math.random() * 4) + 3;
+          }
+          if (
+            ball_coord.right >= paddle_2_coord.left &&
+            ball_coord.top >= paddle_2_coord.top &&
+            ball_coord.bottom <= paddle_2_coord.bottom
+          ) {
+            dxd = 0;
+            dx = Math.floor(Math.random() * 4) + 3;
+            dy = Math.floor(Math.random() * 4) + 3;
+          }
+          if (
+            ball_coord.left <= board_coord.left ||
+            ball_coord.right >= board_coord.right
+          ) {
+            if (ball_coord.left <= board_coord.left) {
+              score_2.innerHTML = +score_2.innerHTML + 1;
+            } else {
+              score_1.innerHTML = +score_1.innerHTML + 1;
+            }
+            gameState = 'start';
+        
+            ball_coord = initial_ball_coord;
+            ball.style = initial_ball.style;
+            message.innerHTML = 'Press Enter to Play Pong';
+            message.style.left = 38 + 'vw';
+            return;
+          }
+          ball.style.top = ball_coord.top + dy * (dyd == 0 ? -1 : 1) + 'px';
+          ball.style.left = ball_coord.left + dx * (dxd == 0 ? -1 : 1) + 'px';
+          ball_coord = ball.getBoundingClientRect();
+          
+          requestAnimationFrame(() => {
+            moveBall(dx, dy, dxd, dyd);
+          });
+        }
 
 
     </script>
+    
 </body>
 </html>
